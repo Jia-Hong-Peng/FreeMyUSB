@@ -171,14 +171,14 @@ void CCleanDeltaDlg::OnBnClickedButton1()
 	killProcessByFileName(L"aeagent.exe");
 	killProcessByFileName(L"agentmonitor.exe");
 
-	AfxMessageBox(L"DONE");
+	
 	//killProcessByName(L"Dserui.exe");
 
 
 	//TODO DEL: %SystemRoot%\system32\wecsvc.dll
-	//killProcessByTitle(L"Websense Endpoint");
+	killProcessByTitle(L"Websense Endpoint");
 	
-	//TODO:clse service
+	AfxMessageBox(L"DONE");
 
 
 }
